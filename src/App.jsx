@@ -1,10 +1,10 @@
-\
+﻿
 import React, { useMemo, useState } from "react";
 
 const regionsDE = [
-  "Bundesweit","Berlin","Bayern","Baden-Württemberg","Hamburg","Hessen",
+  "Bundesweit","Berlin","Bayern","Baden-WÃ¼rttemberg","Hamburg","Hessen",
   "Nordrhein-Westfalen","Sachsen","Niedersachsen","Rheinland-Pfalz",
-  "Schleswig-Holstein","Thüringen","Sachsen-Anhalt","Brandenburg",
+  "Schleswig-Holstein","ThÃ¼ringen","Sachsen-Anhalt","Brandenburg",
   "Saarland","Mecklenburg-Vorpommern","Bremen",
 ];
 
@@ -54,7 +54,7 @@ const initialLeads = [
     signalType: "Stealth hiring pattern",
     location: "Berlin, Germany",
     snippet:
-      "Multiple senior advisors engaged; new GmbH registered Q3; PR agency retained; office lease talks near Südkreuz.",
+      "Multiple senior advisors engaged; new GmbH registered Q3; PR agency retained; office lease talks near SÃ¼dkreuz.",
     url: "https://example.com/lead/stealth-ev",
     date: "2025-10-20",
     confidence: 0.78,
@@ -72,10 +72,10 @@ const initialLeads = [
   },
   {
     id: "L-002",
-    org: "Helix Bio Diagnostics Europe UG (haftungsbeschränkt)",
+    org: "Helix Bio Diagnostics Europe UG (haftungsbeschrÃ¤nkt)",
     title: "German pilot labs & BD ramp-up",
     signalType: "Lab permits + grants + exec hire",
-    location: "München, Bayern",
+    location: "MÃ¼nchen, Bayern",
     snippet:
       "BMBF grant short-list; two lab permits; new VP Strategy (ex-BCG) in Munich; stealth careers page scanning bots found ./jobs.json",
     url: "https://example.com/lead/helix-bio",
@@ -98,9 +98,9 @@ const initialLeads = [
     org: "CloudRetail AG",
     title: "DACH Retail Expansion Program",
     signalType: "Partnership PR + spike in BD roles (non-public)",
-    location: "Köln, NRW",
+    location: "KÃ¶ln, NRW",
     snippet:
-      "Retailer partnership MoU filed; 6 agency RFPs; procurement bots detected increased vendor onboarding; exec offsite in Düsseldorf.",
+      "Retailer partnership MoU filed; 6 agency RFPs; procurement bots detected increased vendor onboarding; exec offsite in DÃ¼sseldorf.",
     url: "https://example.com/lead/cloudretail",
     date: "2025-10-18",
     confidence: 0.66,
@@ -135,7 +135,7 @@ const defaultKeywords = {
     { label: "Market Entry", terms: ["market entry","go-to-market","GTM","launch","expansion","EU entry"] },
     { label: "Strategy", terms: ["strategy","corporate development","BD","partnerships","category expansion"] },
     { label: "Marketing", terms: ["brand","growth marketing","performance","demand gen","positioning"] },
-    { label: "Entrepreneurial", terms: ["generalist","0→1","founding team","builder","operator"] },
+    { label: "Entrepreneurial", terms: ["generalist","0â†’1","founding team","builder","operator"] },
   ],
 };
 
@@ -158,7 +158,7 @@ export default function App() {
         const matched = matchKeywords(lead, keywords);
         const days = daysSince(lead.date, now);
         const recencyFactor = days <= 14 ? weights.recencyBoost : 1.0;
-        const germanyFactor = /germany|deutschland|berlin|munich|münchen|köln|nrw|hamburg|frankfurt|stuttgart|düsseldorf/i.test(
+        const germanyFactor = /germany|deutschland|berlin|munich|mÃ¼nchen|kÃ¶ln|nrw|hamburg|frankfurt|stuttgart|dÃ¼sseldorf/i.test(
           lead.location || ""
         )
           ? weights.germanyBias
@@ -242,7 +242,7 @@ function Logo() {
       <div className="h-9 w-9 rounded-2xl bg-black text-white grid place-items-center text-sm font-bold">EV</div>
       <div>
         <div className="text-sm uppercase tracking-wider text-slate-500">Early Signals</div>
-        <div className="text-lg font-semibold">Vacancy Radar — Germany</div>
+        <div className="text-lg font-semibold">Vacancy Radar â€” Germany</div>
       </div>
     </div>
   );
@@ -276,7 +276,7 @@ function FiltersPanel({ query, setQuery, region, setRegion, minScore, setMinScor
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="org, sector, snippet…"
+            placeholder="org, sector, snippetâ€¦"
             className="mt-1 w-full rounded-xl border border-slate-300 bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400"
           />
         </div>
@@ -314,7 +314,7 @@ function FiltersPanel({ query, setQuery, region, setRegion, minScore, setMinScor
             checked={onlyHighConfidence}
             onChange={(e) => setOnlyHighConfidence(e.target.checked)}
           />
-          <label htmlFor="highconf" className="text-sm text-slate-700">Only high-confidence (≥ 0.70)</label>
+          <label htmlFor="highconf" className="text-sm text-slate-700">Only high-confidence (â‰¥ 0.70)</label>
         </div>
       </div>
     </Card>
@@ -448,7 +448,7 @@ function SourcesPanel({ sources, setSources }) {
             <input
               value={form.url}
               onChange={(e) => setForm({ ...form, url: e.target.value })}
-              placeholder="https://…"
+              placeholder="https://â€¦"
               className="col-span-2 rounded-xl border border-slate-300 bg-white px-3 py-2"
             />
           </div>
@@ -510,7 +510,7 @@ function LeadsTable({ leads }) {
                 </div>
               </Td>
               <Td>
-                <a className="text-blue-600 hover:underline" href={l.url} target="_blank" rel="noreferrer">link ↗</a>
+                <a className="text-blue-600 hover:underline" href={l.url} target="_blank" rel="noreferrer">link â†—</a>
               </Td>
             </tr>
           ))}
@@ -524,7 +524,7 @@ function RoadmapCard() {
   return (
     <Card title="Roadmap & Implementation Plan">
       <ol className="list-decimal pl-5 space-y-3 text-sm text-slate-700">
-        <li><b>Crawling & Ingestion (Week 1–2)</b>: RSS + Sitemaps (PRs, blogs), Handelsregister & Bundesanzeiger parsing, EU funding/grants APIs, Meetup/Tech events, X/LinkedIn org signals, sitemap jobs endpoints (hidden jobs.json), PRNewswire/BusinessWire (DACH filter), Crunchbase triggers. Respect robots.txt; store raw docs in S3.</li>
+        <li><b>Crawling & Ingestion (Week 1â€“2)</b>: RSS + Sitemaps (PRs, blogs), Handelsregister & Bundesanzeiger parsing, EU funding/grants APIs, Meetup/Tech events, X/LinkedIn org signals, sitemap jobs endpoints (hidden jobs.json), PRNewswire/BusinessWire (DACH filter), Crunchbase triggers. Respect robots.txt; store raw docs in S3.</li>
         <li><b>Signal Extraction</b>: Rule-based + LLM tagging (market entry, leadership join, stealth careers page, filings, RFPs). Add German NER (spaCy de_core_news_lg) for orgs/locations.</li>
         <li><b>Scoring v1</b>: Use this UI's weights; add learning loop from your feedback; train logistic regression/XGBoost on confirmed hits.</li>
         <li><b>Dedup/Clustering</b>: pgvector similarity across org + snippet + URL host.</li>
@@ -615,3 +615,4 @@ function defaultSources() {
     { id: "S-5", kind: "Crunchbase", label: "New funding (DACH)", url: "https://www.crunchbase.com/" },
   ];
 }
+
